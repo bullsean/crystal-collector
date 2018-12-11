@@ -59,19 +59,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3" id="blueCrystal" style="width: 100%;">
-                <img class="img-fluid gem" src="assets/images/Blue.jpg" alt="Blue Gem">
-            </div>
-            <div class="col-lg-3" id="greenCrystal" style="width: 100%;">
-                    <img class="img-fluid gem" src="assets/images/Green.jpg" alt="Blue Gem">
-            </div>
-            <div class="col-lg-3" id="purpleCrystal" style="width: 100%;">
-                    <img class="img-fluid gem" src="assets/images/Purple.jpg" alt="Blue Gem">
-            </div>
-            <div class="col-lg-3" id="pinkCrystal" style="width: 100%;">
-                    <img class="img-fluid gem" src="assets/images/Pink.png" alt="Blue Gem">
-            </div>
+        
+        <div class = "row">
+            <div class="col-lg-12" id="crystals"></div>
         </div>
         <div class="row">Your score: <span id="score">0</span>
         </div>
@@ -87,13 +77,29 @@ var counter = 0;
 var randomNum = Math.floor(Math.random() * 101) + 19;
 var wins = 0;
 var losses = 0;
+var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+var pictureOptions = ["assets/images/Blue.jpg", "assets/images/Green.jpg", "assets/images/Purple.jpg", "assets/images/Pink.png"]
+
+//for loop to create my images with random values assigned to each
+
+for (var i = 0; i<numberOptions.length; i++) {
+    var imageCrystal = $("<img>");
+    imageCrystal.addClass("crystal-image gem");
+    imageCrystal.attr("src", pictureOptions[i]);
+    imageCrystal.attr("data-crystalValue", numberOptions[i]);
+    $("#crystals").append(imageCrystal);
+}
 
 //random number replaces text in randomNumber id
 $("#randomNumber").text(randomNum);
 
-//On img click counter adds one
-$(".img-fluid").on("click", function() {
-    counter += 1;
+
+//on crystal-image class click, counter adds random number
+$(".crystal-image").on("click", function() {
+    var crystalValue = ($(this).attr("data-crystalValue"));
+    crystalValue = parseInt(crystalValue);
+    console.log(crystalValue);
+    counter += crystalValue;
     $("#score").text(" " + counter);
     
     if (counter === randomNum) {
