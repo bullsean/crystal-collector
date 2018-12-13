@@ -89,6 +89,7 @@ for (var i = 0; i<numberOptions.length; i++) {
     imageCrystal.addClass("crystal-image gem");
     imageCrystal.attr("src", pictureOptions[i]);
     imageCrystal.attr("data-crystalValue", numberOptions[i]);
+    imageCrystal.attr("data-key", i);
     $("#crystals").append(imageCrystal);
 }
 
@@ -108,7 +109,7 @@ $(".crystal-image").on("click", function() {
 
         // wins =+ 1;
         // $("#win").text(wins);
-        results(counter, randomNum);
+        results();
     } else if (counter > randomNum) {
         // losses =+ 1;
         // $("#loss").text(losses);
@@ -116,49 +117,35 @@ $(".crystal-image").on("click", function() {
     }
 });
 
-function results (counter, randomNum) {
-    console.log(counter, randomNum)
+function results () {
+    
     if (counter === randomNum) {
-        var randomNum = Math.floor(Math.random() * 101) + 19;
-        var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+        randomNum = Math.floor(Math.random() * 101) + 19;
+        numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+        for (var i = 0; i<numberOptions.length; i++) {
+            var selector = ".gem[data-key="+i+"]";
+            var $gem = $(selector);
+            console.log($gem);
+            $gem.attr("data-crystalValue", numberOptions[i]);
+        }
         wins++;
         $("#win").text(wins);
-        var counter = 0;
+        counter = 0;
         $("#randomNumber").text(randomNum);
         $("#score").text(" " + counter);
 
     } else if (counter > randomNum) {
-        var randomNum = Math.floor(Math.random() * 101) + 19;
-        var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+        randomNum = Math.floor(Math.random() * 101) + 19;
+        numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
         losses++;
         $("#loss").text(losses);
-        var counter = 0;
+        counter = 0;
         $("#randomNumber").text(randomNum);
         $("#score").text(" " + counter);
     }
 }
 
-// if (counter === randomNum) {
-//     var randomNum = Math.floor(Math.random() * 101) + 19;
-//     var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
-//     var counter = 0;
-//     wins++;
-//     $("#win").text(wins);
-// }
-// restart function when we run into our game enders.
 
-// function restart() {
-//     randomNum = Math.floor(Math.random() * 101) + 19;
-//     counter = 0;
-//     numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
-    
-//     $("#crystals", "score", "randomNumber").empty();
-
-// }
-
-// if(counter === randomNum || counter >= randomNum) {
-//     restart();
-// }
 
 });
 </script>
