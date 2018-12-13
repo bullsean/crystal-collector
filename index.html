@@ -137,6 +137,11 @@ function results () {
     } else if (counter > randomNum) {
         randomNum = Math.floor(Math.random() * 101) + 19;
         numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+        for (i = 0; i<numberOptions.length; i++) {
+            var selector = ".gem[data-key="+i+"]";
+            var $gem = $(selector);
+            $gem.attr("data-crystalValue", numberOptions[i]);
+        }
         losses++;
         $("#loss").text(losses);
         counter = 0;
