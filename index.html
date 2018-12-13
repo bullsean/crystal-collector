@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/reset.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- <script src="assets/javascript/game.js"></script> -->
 
 </head>
@@ -74,13 +74,13 @@
 
 $(document).ready(function() {
 //Variable declaration
-
 var counter = 0;
 var randomNum = Math.floor(Math.random() * 101) + 19;
 var wins = 0;
 var losses = 0;
 var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
 var pictureOptions = ["assets/images/Blue.jpg", "assets/images/Green.jpg", "assets/images/Purple.jpg", "assets/images/Pink.png"]
+
 
 //for loop to create my images with random values assigned to each
 
@@ -105,14 +105,46 @@ $(".crystal-image").on("click", function() {
     $("#score").text(" " + counter);
     
     if (counter === randomNum) {
-        wins =+ 1;
-        $("#win").text(wins);
-    } else if (counter >= randomNum) {
-        losses =+ 1;
-        $("#loss").text(losses);
+
+        // wins =+ 1;
+        // $("#win").text(wins);
+        results(counter, randomNum);
+    } else if (counter > randomNum) {
+        // losses =+ 1;
+        // $("#loss").text(losses);
+        results();
     }
 });
 
+function results (counter, randomNum) {
+    console.log(counter, randomNum)
+    if (counter === randomNum) {
+        var randomNum = Math.floor(Math.random() * 101) + 19;
+        var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+        wins++;
+        $("#win").text(wins);
+        var counter = 0;
+        $("#randomNumber").text(randomNum);
+        $("#score").text(" " + counter);
+
+    } else if (counter > randomNum) {
+        var randomNum = Math.floor(Math.random() * 101) + 19;
+        var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+        losses++;
+        $("#loss").text(losses);
+        var counter = 0;
+        $("#randomNumber").text(randomNum);
+        $("#score").text(" " + counter);
+    }
+}
+
+// if (counter === randomNum) {
+//     var randomNum = Math.floor(Math.random() * 101) + 19;
+//     var numberOptions = [Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1, Math.floor(Math.random() * 11) + 1];
+//     var counter = 0;
+//     wins++;
+//     $("#win").text(wins);
+// }
 // restart function when we run into our game enders.
 
 // function restart() {
